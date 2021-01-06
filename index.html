@@ -5,7 +5,76 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>INT 1.2</title>
 </head>
-<body>
+<body id="body" style="background: rgb(130,218,195);
+background: radial-gradient(circle, rgba(130,218,195,1) 0%, rgba(127,169,189,1) 58%, rgba(0,206,203,1) 96%);">
+    <div id="cover">        
+        <div class="jumbotron jumbotron-fluid" style="background: 
+            linear-gradient(
+            rgba(0, 0, 250, 0.25), 
+            rgba(125, 250, 250, 0.45)
+            ),
+            url(https://source.unsplash.com/1600x1050/?coding+programming);
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size:cover;
+            color:white !important;
+            height:100vh;">
+            <div class="btn-group rightHeader">
+                <button class="btn btn-outline-primary" id="authorize_button" style="display: none; border: none; border-color: white;
+                color:black;
+                background-color:white;
+                margin-top:30px;
+                font-weight:300;">Authorize to connect G Calendar</button>
+                <button class="btn btn-outline-primary" id="signout_button" style="display: none; margin-right:10px; border-color: white;
+                color:black;
+                background-color:white;
+                margin-top:30px;
+                font-weight:300;">Sign Out</button>
+            </div>
+            <div class="container">
+                <h1 class="title display-3 text-center" style="font-weight:100;"><strong style="font-weight:600;">Gradescope</strong> Tool</h1>
+                <p class="lead string-1 text-center">A tool designed to help you manage your classes more effectively.</p>
+                <div class="arrow" style="position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%,-50%);">
+                    <span style="display: block;
+                    width: 30px;
+                    height: 30px;
+                    border-bottom: 5px solid white;
+                    border-right: 5px solid white;
+                    transform: rotate(45deg);
+                    margin: -10px;
+                    animation: animate 2s infinite; animation-delay: -0.4s"></span>
+                    <span style="display: block;
+                    width: 30px;
+                    height: 30px;
+                    border-bottom: 5px solid white;
+                    border-right: 5px solid white;
+                    transform: rotate(45deg);
+                    margin: -10px;
+                    animation: animate 2s infinite;animation-delay: -0.2s;"></span>
+                    <span style="display: block;
+                    width: 30px;
+                    height: 30px;
+                    border-bottom: 5px solid white;
+                    border-right: 5px solid white;
+                    transform: rotate(45deg);
+                    margin: -10px;
+                    animation: animate 2s infinite; "></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <main class='items' id='items'>
+        <pre id="content" style="white-space: pre-wrap;"></pre>
+    </main>
+
     
+    <script src='script.js' type="module"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
 </body>
 </html>
