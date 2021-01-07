@@ -248,3 +248,169 @@ function handleAuthClick(event) {
 function handleSignoutClick(event) {
     gapi.auth2.getAuthInstance().signOut();
 }
+
+/**
+* Append a pre element to the body containing the given message
+* as its text node. Used to display the results of the API call.
+*
+* @param {string} message Text to be placed in pre element.
+*/
+function appendPre(message) {
+    var pre = document.getElementById('alert-container');
+    var text = document.createElement('div')
+    text.className = "alert alert-success text-center"
+    text.style.width = "500px"
+    text.role = "alert"
+    text.innerHTML = message + '\n'
+    //var textContent = document.createTextNode(message + '\n');
+    pre.appendChild(text);
+}
+
+function appendPreInfo(message) {
+    var pre = document.getElementById('alert-container');
+    var text = document.createElement('div')
+    text.className = "alert alert-primary text-center"
+    text.style.width = "500px"
+    text.role = "alert"
+    text.innerHTML = message + '\n'
+    //var textContent = document.createTextNode(message + '\n');
+    pre.appendChild(text);
+}
+
+function showToast(message) {
+    var divToast = document.getElementById('toastDiv')
+    
+    let toast = document.createElement('div')
+    toast.className = "toast"
+    toast.setAttribute("role", "alert")
+    toast.setAttribute("aria-live", "assertive")
+    toast.setAttribute("aria-atomic", "true")
+
+    let toastHeader = document.createElement('div')
+    toastHeader.className = "toast-header"
+
+    let title = document.createElement('strong')
+    title.className = "mr-auto"
+    title.innerHTML = "Calendar"
+    let small = document.createElement('small')
+    small.className = "text-muted"
+    small.innerHTML = "just now"
+    let button = document.createElement('button')
+    button.type = "button"
+    button.className = "ml-2 mb-1 close"
+    button.setAttribute("data-dismiss","true")
+    button.setAttribute("aria-label","Close")
+
+    toastHeader.append(title)
+    toastHeader.append(small)
+    toastHeader.append(button)
+
+    let bodyToast = document.createElement('div')
+    bodyToast.className = "toast-body"
+    bodyToast.innerHTML = message
+
+    toast.append(toastHeader)
+    toast.append(bodyToast)
+    
+
+    divToast2.append(toast)
+}
+
+/**
+* Print the summary and start datetime/date of the next ten events in
+* the authorized user's calendar. If no events are found an
+* appropriate message is printed.
+*/
+function listUpcomingEvents() {
+
+    console.log("here")
+    
+    for (let i = 0; i<data.length; i++) {
+        Object.entries(data[i]["dates"]).forEach(([key, value]) => {
+            console.log(key)
+            console.log(Object.keys(data[i]["dates"][key])[0])
+            console.log(Object.values(value)[0])
+            var date = Date.parse(Object.values(value)[0])
+            var dateEpoch = new Date(date)
+            var year = dateEpoch.getFullYear();
+            var month = dateEpoch.getMonth() + 1;
+            var day = dateEpoch.getDate();
+            var dateTime = year + "-" + month + "-" + day
+            console.log(dateTime)
+            var event = {
+                'summary': `${data[i]["class"]} - ${Object.keys(data[i]["dates"][key])[0]}`,
+                'location': '',
+                'description': `${Object.keys(data[i]["dates"][key])[0]} due today`,
+                'start': {
+                    'dateTime': dateTime+'T22:00:00-07:00',
+                    'timeZone': 'America/Los_Angeles'
+                },
+                'end': {
+                    'dateTime': dateTime+'T22:59:00-07:00',
+                    'timeZone': 'America/Los_Angeles'
+                },
+                'recurrence': [
+                    // 'RRULE:FREQ=DAILY;COUNT=2'
+                ],
+                'attendees': [
+                    
+                ],
+                'reminders': {
+                    'useDefault': false,
+                    'overrides': [
+                        {'method': 'popup', 'minutes': 1440},
+                        {'method': 'popup', 'minutes': 10},
+                    ]
+                }
+            };
+
+            var request = gapi.client.calendar.events.insert({
+                'calendarId': 'primary',
+                'resource': event
+            });
+            
+            gapi.client.calendar.events.list({
+                'calendarId': 'primary',
+                'timeMin': (new Date()).toISOString(),
+                'showDeleted': false,
+                'singleEvents': true,
+                'maxResults': 30,
+                'orderBy': 'startTime'
+            }).then(function(response) {
+                var events = response.result.items;
+            
+                if (events.length > 0) {
+                    for (let j = 0; j < events.length; j++) {
+                        var event = events[j];
+                        var when = event.start.dateTime;
+                        if (!when) {
+                            when = event.start.date;
+                        }
+                        if (event.summary == `${data[i]["class"]} - ${Object.keys(data[i]["dates"][key])[0]}`) {
+                            console.log("existe")
+                            appendPreInfo(`Event already in calendar: ${data[i]["class"]} - ${Object.keys(data[i]["dates"][key])[0]}`)
+                            return
+                        } 
+                        //appendPre(event.summary + ' (' + when + ')')
+                    }
+                    request.execute(function(event) {
+                        appendPre('Event added to calendar: ' + `${data[i]["class"]} - ${Object.keys(data[i]["dates"][key])[0]}`);
+                        console.log("added event")
+                        //$('.toast').toast('show');
+                    });
+                } else {
+                    //appendPre('No upcoming events found.');
+                }
+            });
+                
+        });
+    }   
+}
+
+function supportsEmoji () {
+    var ctx = document.createElement("canvas").getContext("2d");
+    ctx.fillText("😗", -2, 4);
+    return ctx.getImageData(0, 0, 1, 1).data[3] > 0; // Not a transparent pixel
+  }
+  
+  console.log( supportsEmoji() );
