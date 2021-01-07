@@ -1,6 +1,8 @@
 
 import data from './data.js'
 const itemsContainer = document.getElementById('items')
+const itemsTable = document.getElementById('items-table')
+
 
 window.onload = handleClientLoad()
 
@@ -25,6 +27,153 @@ let container = document.createElement('div')
 container.className = "container"
 let row = document.createElement('div')
 row.className = "row"
+
+
+// let tableContainer = document.createElement('div')
+// tableContainer.className = "container"
+// tableContainer.style.width = "140%"
+// tableContainer.style.padding = "20px"
+// let tableResponsive = document.createElement('div')
+// tableResponsive.className = "table-responsive"
+// let table = document.createElement('table')
+// table.id = "table"
+// table.className = "table table-striped"
+// table.style.margin = "0px"
+// table.style.padding = "0px"
+// table.style.whiteSpace = "pre-wrap"
+// table.style.width = "100%"
+// let tableHead = document.createElement('thead')
+// let tableHeadTr = document.createElement('tr')
+// let th1 = document.createElement('th')
+// let th2 = document.createElement('th')
+// let th3 = document.createElement('th')
+// let th4 = document.createElement('th')
+// th1.scope = "col"
+// th2.scope = "col"
+// th3.scope = "col"
+// th4.scope = "col"
+// th1.innerHTML = "Class"
+// th2.innerHTML = "Assignment"
+// th3.innerHTML = "Completed"
+// th4.innerHTML = ""
+// tableHeadTr.append(th1, th2, th3, th4)
+// tableHead.append(tableHeadTr)
+// let tableBody = document.createElement('tbody')
+
+// table.style.backgroundColor = "white"
+
+// let done = false
+
+
+// for(let i = 0; i<data.length; i++) {
+//     if (data[i]["missingAssignmentsAll"] == null) {
+//         if (done == false) {
+//             done = true
+//             let tr = document.createElement('tr')
+//             let td1 = document.createElement('td')
+//             let title = document.createElement('h1')
+//             title.innerHTML = "Assignments"
+//             td1.append(title)
+//             let td2 = document.createElement('td')
+//             let td3 = document.createElement('td')
+//             let td4 = document.createElement('td')
+//             tr.append(td1,td2,td3,td4)
+//             tableBody.append(tr)
+//         }
+
+//         if (data[i]["assignments"] != null) {
+//             let tr = document.createElement('tr')
+//             tr.className = "table-info"
+//             let td1 = document.createElement('td')
+//             let title = document.createElement('h3')
+//             title.innerHTML = data[i]["class"]
+//             td1.append(title)
+//             let td2 = document.createElement('td')
+//             //td2.innerHTML = `Grade: ${data[i]["grade"]}`
+//             let td3 = document.createElement('td')
+//             let td4 = document.createElement('td')
+//             tr.append(td1,td2,td3,td4)
+//             tableBody.append(tr)
+
+//             for (let k = 0;k<data[i]["assignments"].length; k++) {
+//                 console.log(data[i]["assignments"][k])
+//                 let trClass = document.createElement('tr')
+//                 let td1Class = document.createElement('td')
+//                 td1.innerHTML = data[i]["assignments"][k]
+//                 let td2Class = document.createElement('td')
+//                 let td3Class = document.createElement('td')
+//                 let td4Class = document.createElement('td')
+//                 trClass.append(td1Class, td2Class, td3Class, td4Class)
+//                 tableBody.append(trClass)
+//             }
+
+            
+
+//             // let trA = document.createElement('tr')
+//             // trA.className = "table-info"
+//             // let td1A = document.createElement('td')
+//             // td1A.innerHTML = data[i]["class"]
+//             // let td2A = document.createElement('td')
+//             // let td3A = document.createElement('td')
+//             // let td4A = document.createElement('td')
+//             // trA.append(td1,td2,td3,td4)
+//             // tableBody.append(tr)
+//         }
+        
+        
+
+        
+
+
+//     } else {
+//         let tr = document.createElement('tr')
+        
+//         let td1 = document.createElement('td')
+//         let title = document.createElement('h1')
+//         title.innerHTML = "Missing Assignments"
+//         td1.append(title)
+//         let td2 = document.createElement('td')
+//         let td3 = document.createElement('td')
+//         let td4 = document.createElement('td')
+//         tr.append(td1,td2,td3,td4)
+//         tableBody.append(tr)
+
+//         Object.entries(data[i]["missingAssignmentsAll"]).forEach(([key, value]) => {
+//             let tr = document.createElement('tr')
+//             tr.className = "table-danger"
+//             let td1 = document.createElement('td')
+//             td1.innerHTML = Object.keys(data[i]["missingAssignmentsAll"][key])[0]
+//             let td2 = document.createElement('td')
+//             td2.innerHTML = Object.values(value)[0]
+//             let td3 = document.createElement('td')
+//             td3.innerHTML = "❌"
+//             let td4 = document.createElement('td')
+//             let button = document.createElement('button')
+//             button.className = "btn btn-outline-primary"
+//             button.innerHTML = "Details"
+//             td4.append(button)
+//             tr.append(td1,td2,td3,td4)
+//             tableBody.append(tr)
+//         }) 
+        
+//     }
+
+    
+
+    
+
+    
+
+// }
+
+// table.append(tableHead)
+// table.append(tableBody)
+// tableResponsive.append(table)
+// tableContainer.append(tableResponsive)
+// itemsTable.append(tableContainer)
+
+
+
 for (let i = 0; i<data.length; i++) {
     
     // if (i%3 == 0) {
@@ -80,91 +229,97 @@ for (let i = 0; i<data.length; i++) {
     colapseDiv.style.margin = "10px"
     colapseDiv.className = "collapse multi-collapse"
     colapseDiv.id = "gradedAssignments"+i
-    
-    for (let k = 0;k<data[i]["assignments"].length; k++) {
-        let gradedDiv = document.createElement('div')
-        gradedDiv.innerHTML = data[i]["assignments"][k]
-        colapseDiv.appendChild(gradedDiv)
-    }
-    
-    // gradedDiv.id = "missingAssignments"
-    colapseDiv.className = "card card-body"
-    gradedCol.appendChild(colapseDiv)
-    infoRow.append(gradedCol)
-    
-    
-    title.className = "card-title"
-    title.innerHTML = data[i]["class"]
-    
-    grade.className = "card-text"
-    //grade.style.color = "green"
-    grade.innerHTML = `Grade: ${data[i]["grade"]}`
-    
-    button.className = "btn btn-primary"
-    button.innerHTML = "Details"
-    button.id = i
-    
-    
-    cardBody.appendChild(title)
-    cardBody.appendChild(grade)
-    
-    // Object.entries(data[i]["dates"]).forEach(([key, value]) => {
-    //     console.log(Object.keys(data[i]["dates"][key])[0])
-    //     console.log(Object.values(value)[0])
-    //     console.log(Date(Object.values(value)[0]))
-    // });
-    
-    
-    if(data[i]["missing"] != null){
+
+    if (data[i]["assignments"] != null) {
         
-        let missingCol = document.createElement('div')
-        missingCol.className = "col"
-        let colapseDiv = document.createElement('div')
-        colapseDiv.style.margin = "10px"
-        colapseDiv.className = "collapse multi-collapse"
-        colapseDiv.id = "missingAssignments"+i
+        for (let k = 0;k<data[i]["assignments"].length; k++) {
+            let gradedDiv = document.createElement('div')
+            gradedDiv.innerHTML = data[i]["assignments"][k]
+            colapseDiv.appendChild(gradedDiv)
+        }
         
         // gradedDiv.id = "missingAssignments"
         colapseDiv.className = "card card-body"
-        cardBody.appendChild(infoRow)
+        gradedCol.appendChild(colapseDiv)
+        infoRow.append(gradedCol)
         
-        // let text = document.createElement('h5')
-        // text.innerHTML = "Missing Assignments:"
-        // cardBody.appendChild(text)
-        for(let j = 0; j<data[i]["missing"].length;j++) {
-            let missingDiv = document.createElement('div')
-            missingDiv.innerHTML = data[i]["missing"][j]
+        
+        title.className = "card-title"
+        title.innerHTML = data[i]["class"]
+        
+        grade.className = "card-text"
+        //grade.style.color = "green"
+        grade.innerHTML = `Grade: ${data[i]["grade"]}`
+        
+        button.className = "btn btn-primary"
+        button.innerHTML = "Details"
+        button.id = i
+        
+        
+        cardBody.appendChild(title)
+        cardBody.appendChild(grade)
+        
+        // Object.entries(data[i]["dates"]).forEach(([key, value]) => {
+        //     console.log(Object.keys(data[i]["dates"][key])[0])
+        //     console.log(Object.values(value)[0])
+        //     console.log(Date(Object.values(value)[0]))
+        // });
+        
+        
+        if(data[i]["missing"] != null){
             
-            // console.log(data[i]["missing"][j])
-            // let missing = document.createElement('p')
-            // missing.innerHTML = data[i]["missing"][j]
-            // missing.style.color = "red"
-            // cardBody.append(missing)
+            let missingCol = document.createElement('div')
+            missingCol.className = "col"
+            let colapseDiv = document.createElement('div')
+            colapseDiv.style.margin = "10px"
+            colapseDiv.className = "collapse multi-collapse"
+            colapseDiv.id = "missingAssignments"+i
             
-            colapseDiv.appendChild(missingDiv)
+            // gradedDiv.id = "missingAssignments"
+            colapseDiv.className = "card card-body"
+            cardBody.appendChild(infoRow)
+            
+            // let text = document.createElement('h5')
+            // text.innerHTML = "Missing Assignments:"
+            // cardBody.appendChild(text)
+            for(let j = 0; j<data[i]["missing"].length;j++) {
+                let missingDiv = document.createElement('div')
+                missingDiv.innerHTML = data[i]["missing"][j]
+                
+                // console.log(data[i]["missing"][j])
+                // let missing = document.createElement('p')
+                // missing.innerHTML = data[i]["missing"][j]
+                // missing.style.color = "red"
+                // cardBody.append(missing)
+                
+                colapseDiv.appendChild(missingDiv)
+            }
+            
+            missingCol.appendChild(colapseDiv)
+            infoRow.append(missingCol)
+            dropDown.appendChild(missingAssignments)
+            
         }
         
-        missingCol.appendChild(colapseDiv)
-        infoRow.append(missingCol)
-        dropDown.appendChild(missingAssignments)
         
+        cardBody.appendChild(dropDown)
+        cardBody.appendChild(infoRow)
+        let center = document.createElement('div')
+        center.className = "text-center"
+        center.appendChild(button)
+        cardBody.appendChild(center)
+        
+        card.appendChild(cardBody)
+        card.style.margin = "10px"
+        card.style.minHeight = "150px"
+        card.style.width = "520px"
+        column.appendChild(card)
+        row.appendChild(column)
+        container.appendChild(row)
+
     }
     
     
-    cardBody.appendChild(dropDown)
-    cardBody.appendChild(infoRow)
-    let center = document.createElement('div')
-    center.className = "text-center"
-    center.appendChild(button)
-    cardBody.appendChild(center)
-    
-    card.appendChild(cardBody)
-    card.style.margin = "10px"
-    card.style.minHeight = "150px"
-    card.style.width = "520px"
-    column.appendChild(card)
-    row.appendChild(column)
-    container.appendChild(row)
     
     //itemsContainer.appendChild(card)
 }
