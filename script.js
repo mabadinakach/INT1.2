@@ -223,3 +223,28 @@ function initClient() {
         appendPre(JSON.stringify(error, null, 2));
     });
 }
+
+function updateSigninStatus(isSignedIn) {
+    if (isSignedIn) {
+        authorizeButton.style.display = 'none';
+        signoutButton.style.display = 'block';
+        listUpcomingEvents();
+    } else {
+        authorizeButton.style.display = 'block';
+        signoutButton.style.display = 'none';
+    }
+}
+
+/**
+*  Sign in the user upon button click.
+*/
+function handleAuthClick(event) {
+    gapi.auth2.getAuthInstance().signIn();
+}
+
+/**
+*  Sign out the user upon button click.
+*/
+function handleSignoutClick(event) {
+    gapi.auth2.getAuthInstance().signOut();
+}
